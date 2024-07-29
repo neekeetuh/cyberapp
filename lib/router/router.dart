@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:cyberapp/features/auth/presentation/view/view.dart';
 import 'package:cyberapp/features/home_screen/view/view.dart';
 import 'package:cyberapp/features/match_detail_screen/view/view.dart';
 import 'package:cyberapp/features/matches/domain/domain.dart';
@@ -48,6 +49,18 @@ class AppRouter extends _$AppRouter {
               path: 'fake_matches',
             ),
           ],
+        ),
+        AutoRoute(
+          page: LoginRoute.page,
+          path: '/login',
+        ),
+        AutoRoute(
+          page: SignupRoute.page,
+          path: '/signup',
+        ),
+        AutoRoute(
+          page: AccountRoute.page,
+          path: '/account',
         ),
         AutoRoute(
           page: NewsDetailRoute.page,

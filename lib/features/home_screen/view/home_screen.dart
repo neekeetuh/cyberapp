@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cyberapp/router/router.dart';
 import 'package:cyberapp/ui/ui.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 @RoutePage()
@@ -10,7 +11,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AutoTabsRouter(
-        routes:  const [
+        routes: const [
           NewsRoute(),
           MatchesRoute(),
           RankingsRoute(),
@@ -31,12 +32,23 @@ class HomeScreen extends StatelessWidget {
                 'CyberApp',
               ),
               actions: [
-                IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.account_circle,
-                      color: Colors.white,
-                    )),
+                FirebaseAuth.instance.currentUser != null
+                    ? IconButton(
+                        onPressed: () {
+                          AutoRouter.of(context).push(const AccountRoute());
+                        },
+                        icon: const Icon(
+                          Icons.account_circle,
+                          color: Colors.white,
+                        ))
+                    : IconButton(
+                        onPressed: () {
+                          AutoRouter.of(context).push(const LoginRoute());
+                        },
+                        icon: const Icon(
+                          Icons.login,
+                          color: Colors.white,
+                        )),
               ],
               bottom: const PreferredSize(
                 preferredSize: Size.fromHeight(30),

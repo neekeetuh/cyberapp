@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "318436618202",
+    "project_id": "cyberapp-f6ff7",
+    "storage_bucket": "cyberapp-f6ff7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:318436618202:android:b4763b902e03fcb2569ae3",
+        "android_client_info": {
+          "package_name": "com.neekeetuh.cyberapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByKLMqgAujr6JH3D5XXZ0zXXJLrzf31HE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

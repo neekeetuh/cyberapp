@@ -1,21 +1,17 @@
 import 'package:cyberapp/features/match_detail_screen/bloc/match_detail_bloc.dart';
-import 'package:cyberapp/features/matches/data/matches_repository.dart';
-import 'package:cyberapp/features/matches/domain/domain.dart';
 import 'package:cyberapp/features/matches_screen/bloc/matches_list_bloc.dart';
 import 'package:cyberapp/features/player_screen/bloc/player_bloc.dart';
 import 'package:cyberapp/features/team_screen/bloc/team_bloc.dart';
 import 'package:cyberapp/router/router.dart';
 import 'package:cyberapp/ui/ui.dart';
-import 'package:dio/dio.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 Future<void> main() async {
-  // final apiClient = VlrApiClient(dio: Dio());
-  // apiClient.getRankingTeamsListFromApi(('eu')).then((value) => print(value[0]));
-  // final matchesRepo = MatchesRepository(dio:Dio());
-  // matchesRepo.fetchMatches('results').then((value) => print(value));
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const ProviderScope(child: CyberApp()));
 }
 
