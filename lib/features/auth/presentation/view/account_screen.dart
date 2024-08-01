@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 
 @RoutePage()
 class AccountScreen extends StatelessWidget {
-  const AccountScreen({super.key});
+  final User user;
+  const AccountScreen({super.key, required this.user});
 
   Future<void> logout() async {
     await FirebaseAuth.instance.signOut();

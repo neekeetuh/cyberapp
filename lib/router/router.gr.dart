@@ -16,9 +16,13 @@ abstract class _$AppRouter extends RootStackRouter {
   @override
   final Map<String, PageFactory> pagesMap = {
     AccountRoute.name: (routeData) {
+      final args = routeData.argsAs<AccountRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const AccountScreen(),
+        child: AccountScreen(
+          key: args.key,
+          user: args.user,
+        ),
       );
     },
     FakeMatchesRoute.name: (routeData) {
@@ -150,16 +154,40 @@ abstract class _$AppRouter extends RootStackRouter {
 
 /// generated route for
 /// [AccountScreen]
-class AccountRoute extends PageRouteInfo<void> {
-  const AccountRoute({List<PageRouteInfo>? children})
-      : super(
+class AccountRoute extends PageRouteInfo<AccountRouteArgs> {
+  AccountRoute({
+    Key? key,
+    required User user,
+    List<PageRouteInfo>? children,
+  }) : super(
           AccountRoute.name,
+          args: AccountRouteArgs(
+            key: key,
+            user: user,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'AccountRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<AccountRouteArgs> page =
+      PageInfo<AccountRouteArgs>(name);
+}
+
+class AccountRouteArgs {
+  const AccountRouteArgs({
+    this.key,
+    required this.user,
+  });
+
+  final Key? key;
+
+  final User user;
+
+  @override
+  String toString() {
+    return 'AccountRouteArgs{key: $key, user: $user}';
+  }
 }
 
 /// generated route for

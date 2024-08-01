@@ -3,6 +3,7 @@ import 'package:cyberapp/router/router.dart';
 import 'package:cyberapp/ui/ui.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 @RoutePage()
 class HomeScreen extends StatelessWidget {
@@ -35,7 +36,7 @@ class HomeScreen extends StatelessWidget {
                 FirebaseAuth.instance.currentUser != null
                     ? IconButton(
                         onPressed: () {
-                          AutoRouter.of(context).push(const AccountRoute());
+                          AutoRouter.of(context).push( AccountRoute(user: GetIt.I<User>()));
                         },
                         icon: const Icon(
                           Icons.account_circle,

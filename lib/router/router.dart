@@ -16,6 +16,7 @@ import 'package:cyberapp/features/team_screen/view/view.dart';
 import 'package:cyberapp/repositories/matches/models/models.dart';
 import 'package:cyberapp/repositories/players/models/models.dart';
 import 'package:cyberapp/repositories/teams/models/models.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 part 'router.gr.dart';

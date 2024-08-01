@@ -4,26 +4,34 @@ import 'package:cyberapp/features/player_screen/bloc/player_bloc.dart';
 import 'package:cyberapp/features/team_screen/bloc/team_bloc.dart';
 import 'package:cyberapp/router/router.dart';
 import 'package:cyberapp/ui/ui.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get_it/get_it.dart';
+
+
+void registerDI() {
+  GetIt.I.registerSingleton<AppRouter>(AppRouter());
+  GetIt.I.registerFactory<User>(() => FirebaseAuth.instance.currentUser!);
+}
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const ProviderScope(child: CyberApp()));
+  registerDI();
+  runApp(ProviderScope(
+    child: CyberApp(
+      router: GetIt.I<AppRouter>(),
+    ),
+  ));
 }
 
-class CyberApp extends StatefulWidget {
-  const CyberApp({super.key});
+class CyberApp extends StatelessWidget {
+  final AppRouter router;
 
-  @override
-  State<CyberApp> createState() => _CyberAppState();
-}
-
-class _CyberAppState extends State<CyberApp> {
-  final _router = AppRouter();
+  const CyberApp({super.key, required this.router});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +53,7 @@ class _CyberAppState extends State<CyberApp> {
       child: MaterialApp.router(
         title: 'CyberApp',
         theme: mainTheme,
-        routerConfig: _router.config(),
+        routerConfig: router.config(),
       ),
     );
   }
