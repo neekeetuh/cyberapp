@@ -2,6 +2,9 @@
 
 A new Flutter project.
 
+folders lib/data, lib/repositories, lib/features/match_detail_screen, lib/features/matches_screen, lib/features/player_screen, lib/features/team_screen
+contain mocks, do not have actual logic in there, they are still in the project for a further implementation and also have some useful ui componets in it.
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
