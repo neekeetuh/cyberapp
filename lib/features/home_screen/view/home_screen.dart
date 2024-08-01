@@ -11,14 +11,30 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Map<PageRouteInfo, BottomNavigationBarItem> tabs = {
+      const NewsRoute(): const BottomNavigationBarItem(
+        icon: Icon(Icons.newspaper),
+        label: 'News',
+      ),
+      const MatchesRoute(): const BottomNavigationBarItem(
+        icon: Icon(Icons.gamepad_outlined),
+        label: 'Matches',
+      ),
+      const RankingsRoute(): const BottomNavigationBarItem(
+        icon: Icon(Icons.emoji_events_rounded),
+        label: 'Rankings',
+      ),
+      const StatsRoute(): const BottomNavigationBarItem(
+        icon: Icon(Icons.query_stats),
+        label: 'Stats',
+      ),
+      const FakeMatchesRoute(): const BottomNavigationBarItem(
+        icon: Icon(Icons.gamepad_outlined),
+        label: 'Fake Matches',
+      ),
+    };
     return AutoTabsRouter(
-        routes: const [
-          NewsRoute(),
-          MatchesRoute(),
-          RankingsRoute(),
-          StatsRoute(),
-          FakeMatchesRoute(),
-        ],
+        routes: tabs.keys.toList(),
         builder: (context, child) {
           final tabsRouter = AutoTabsRouter.of(context);
           return Scaffold(
@@ -36,7 +52,8 @@ class HomeScreen extends StatelessWidget {
                 FirebaseAuth.instance.currentUser != null
                     ? IconButton(
                         onPressed: () {
-                          AutoRouter.of(context).push( AccountRoute(user: GetIt.I<User>()));
+                          AutoRouter.of(context)
+                              .push(AccountRoute(user: GetIt.I<User>()));
                         },
                         icon: const Icon(
                           Icons.account_circle,
@@ -61,28 +78,7 @@ class HomeScreen extends StatelessWidget {
               currentIndex: tabsRouter.activeIndex,
               onTap: (index) => _openTabsPage(index, tabsRouter),
               type: BottomNavigationBarType.fixed,
-              items: const [
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.newspaper),
-                  label: 'News',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.gamepad_outlined),
-                  label: 'Matches',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.emoji_events_rounded),
-                  label: 'Rankings',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.query_stats),
-                  label: 'Stats',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.gamepad_outlined),
-                  label: 'Fake Matches',
-                ),
-              ],
+              items: tabs.values.toList(),
             ),
           );
         });

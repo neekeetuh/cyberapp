@@ -13,7 +13,6 @@ class AccountScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = FirebaseAuth.instance.currentUser;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Account'),
@@ -24,12 +23,12 @@ class AccountScreen extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                'Your email: \n ${user?.email}',
+                'Your email: \n ${user.email}',
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 20,),
               Text(
-                'Your ID: \n ${user?.uid}',
+                'Your ID: \n ${user.uid}',
                 textAlign: TextAlign.center,
               ),
               TextButton(
