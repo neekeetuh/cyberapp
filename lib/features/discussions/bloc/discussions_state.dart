@@ -31,3 +31,12 @@ final class DiscussionsLoadingFailed extends DiscussionsState {
   @override
   List<Object?> get props => [error];
 }
+
+final class DiscussionCreationFailed extends DiscussionsState{
+  final Object? error;
+
+  const DiscussionCreationFailed({required this.error});
+
+  @override
+  List<Object?> get props => [error];
+}

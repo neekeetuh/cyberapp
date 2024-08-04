@@ -25,6 +25,12 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    DiscussionsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const DiscussionsScreen(),
+      );
+    },
     FakeMatchesRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -188,6 +194,20 @@ class AccountRouteArgs {
   String toString() {
     return 'AccountRouteArgs{key: $key, user: $user}';
   }
+}
+
+/// generated route for
+/// [DiscussionsScreen]
+class DiscussionsRoute extends PageRouteInfo<void> {
+  const DiscussionsRoute({List<PageRouteInfo>? children})
+      : super(
+          DiscussionsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'DiscussionsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for

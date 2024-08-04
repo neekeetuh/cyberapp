@@ -94,7 +94,7 @@ Future<List<MatchResult>> matchResultsList(MatchResultsListRef ref) async {
 }
 
 @riverpod
-Future<Map<String,dynamic>> matchesMap(MatchesMapRef ref) async{
+Future<Map<String, dynamic>> matchesMap(MatchesMapRef ref) async {
   final matchesRepository = ref.watch(matchesRepositoryProvider);
   final matches = await matchesRepository._fetchMatches();
   return matches;

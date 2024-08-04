@@ -1,6 +1,5 @@
 import 'package:cyberapp/features/discussions/domain/domain.dart';
 import 'package:equatable/equatable.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hive/hive.dart';
 import 'package:uuid/uuid.dart';
 
@@ -11,25 +10,27 @@ class Comment extends Equatable {
   @HiveField(4)
   late final String id;
   @HiveField(0)
-  final User user;
+  final String userUid;
   @HiveField(1)
   final Commentable topic;
   @HiveField(2)
   final String text;
   @HiveField(3)
-  final DateTime date;
+  late final DateTime date;
 
   @override
-  List<Object?> get props => [user, topic, text, date];
+  List<Object?> get props => [userUid, topic, text, date];
 
 //<editor-fold desc="Data Methods">
   Comment({
-    required this.user,
+    String? id,
+    required this.userUid,
     required this.topic,
     required this.text,
-    required this.date,
+    DateTime? date,
   }) {
     id = const Uuid().v4();
+    date = DateTime.now();
   }
 
   @override
@@ -37,19 +38,19 @@ class Comment extends Equatable {
       identical(this, other) ||
       (other is Comment &&
           runtimeType == other.runtimeType &&
-          user == other.user &&
+          userUid == other.userUid &&
           topic == other.topic &&
           text == other.text &&
           date == other.date);
 
   @override
   int get hashCode =>
-      user.hashCode ^ topic.hashCode ^ text.hashCode ^ date.hashCode;
+      userUid.hashCode ^ topic.hashCode ^ text.hashCode ^ date.hashCode;
 
   @override
   String toString() {
     return 'Comment{' +
-        ' user: $user,' +
+        ' user: $userUid,' +
         ' topic: $topic,' +
         ' text: $text,' +
         ' date: $date,' +
@@ -57,36 +58,19 @@ class Comment extends Equatable {
   }
 
   Comment copyWith({
-    User? user,
+    String? id,
+    String? userUid,
     Commentable? topic,
     String? text,
     DateTime? date,
   }) {
     return Comment(
-      user: user ?? this.user,
+      id: id ?? this.id,
+      userUid: userUid ?? this.userUid,
       topic: topic ?? this.topic,
       text: text ?? this.text,
       date: date ?? this.date,
     );
   }
-
-  Map<String, dynamic> toMap() {
-    return {
-      'user': this.user,
-      'topic': this.topic,
-      'text': this.text,
-      'date': this.date,
-    };
-  }
-
-  factory Comment.fromMap(Map<String, dynamic> map) {
-    return Comment(
-      user: map['user'] as User,
-      topic: map['topic'] as Commentable,
-      text: map['text'] as String,
-      date: map['date'] as DateTime,
-    );
-  }
-
 //</editor-fold>
 }

@@ -17,13 +17,14 @@ class DiscussionAdapter extends TypeAdapter<Discussion> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Discussion(
-      user: fields[0] as User,
+      id: fields[6] as String,
+      userUid: fields[0] as String,
       topic: fields[1] as String,
       description: fields[2] as String,
       date: fields[3] as DateTime,
-      likesCount: fields[4] == null ? 0 : fields[4] as int,
-      dislikesCount: fields[5] == null ? 0 : fields[5] as int,
-    )..id = fields[6] as String;
+      likesCount: fields[4] as int,
+      dislikesCount: fields[5] as int,
+    );
   }
 
   @override
@@ -33,7 +34,7 @@ class DiscussionAdapter extends TypeAdapter<Discussion> {
       ..writeByte(6)
       ..write(obj.id)
       ..writeByte(0)
-      ..write(obj.user)
+      ..write(obj.userUid)
       ..writeByte(1)
       ..write(obj.topic)
       ..writeByte(2)

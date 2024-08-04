@@ -1,18 +1,16 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:cyberapp/features/auth/presentation/data/data.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 @RoutePage()
-class AccountScreen extends StatelessWidget {
+class AccountScreen extends ConsumerWidget {
   final User user;
   const AccountScreen({super.key, required this.user});
 
-  Future<void> logout() async {
-    await FirebaseAuth.instance.signOut();
-  }
-
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Account'),
@@ -32,8 +30,9 @@ class AccountScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               TextButton(
-                  onPressed: () {
-                    logout();
+                  onPressed: () async {
+                    await FirebaseAuth.instance.signOut();
+                    ref.invalidate(currentUserProvider);
                     AutoRouter.of(context).popUntilRoot();
                   },
                   child: const Text('Logout'))
@@ -44,3 +43,4 @@ class AccountScreen extends StatelessWidget {
     );
   }
 }
+

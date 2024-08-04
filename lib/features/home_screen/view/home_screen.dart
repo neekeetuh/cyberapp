@@ -1,16 +1,17 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:cyberapp/features/auth/presentation/data/data.dart';
 import 'package:cyberapp/router/router.dart';
 import 'package:cyberapp/ui/ui.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 @RoutePage()
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final currentUser = ref.watch(currentUserProvider);
     final Map<PageRouteInfo, BottomNavigationBarItem> tabs = {
       const NewsRoute(): const BottomNavigationBarItem(
         icon: Icon(Icons.newspaper),
@@ -27,6 +28,10 @@ class HomeScreen extends StatelessWidget {
       const StatsRoute(): const BottomNavigationBarItem(
         icon: Icon(Icons.query_stats),
         label: 'Stats',
+      ),
+      const DiscussionsRoute(): const BottomNavigationBarItem(
+        icon: Icon(Icons.topic_outlined),
+        label: 'Discussions',
       ),
       const FakeMatchesRoute(): const BottomNavigationBarItem(
         icon: Icon(Icons.gamepad_outlined),
@@ -49,11 +54,11 @@ class HomeScreen extends StatelessWidget {
                 'CyberApp',
               ),
               actions: [
-                FirebaseAuth.instance.currentUser != null
+                currentUser != null
                     ? IconButton(
                         onPressed: () {
                           AutoRouter.of(context)
-                              .push(AccountRoute(user: GetIt.I<User>()));
+                              .push(AccountRoute(user: currentUser));
                         },
                         icon: const Icon(
                           Icons.account_circle,

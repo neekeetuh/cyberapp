@@ -9,7 +9,7 @@ class CommentsRepository {
 
   Future<void> createComment(User user, Commentable topic, String text) async {
     final comment =
-        Comment(user: user, topic: topic, date: DateTime.now(), text: text);
+        Comment(userUid: user.uid, topic: topic, date: DateTime.now(), text: text);
     await commentsBox.put(comment.id, comment);
   }
 

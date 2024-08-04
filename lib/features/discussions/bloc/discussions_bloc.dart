@@ -13,6 +13,7 @@ class DiscussionsBloc extends Bloc<DiscussionsEvent, DiscussionsState> {
 
   DiscussionsBloc(this.repository) : super(DiscussionsInitial()) {
     on<LoadDiscussions>(onLoadDiscussions);
+    on<CreateDiscussion>(onCreateDiscussion);
   }
 
   FutureOr<void> onLoadDiscussions(
@@ -25,6 +26,18 @@ class DiscussionsBloc extends Bloc<DiscussionsEvent, DiscussionsState> {
       emit(DiscussionsLoaded(discussions: discussions));
     } catch (error) {
       emit(DiscussionsLoadingFailed(error: error));
+    }
+  }
+
+  FutureOr<void> onCreateDiscussion(
+      CreateDiscussion event, Emitter<DiscussionsState> emit) async {
+    try {
+      await repository.createDiscussion(
+        event.topic,
+        event.description,
+      );
+    } catch (error) {
+      emit(DiscussionCreationFailed(error: error));
     }
   }
 }

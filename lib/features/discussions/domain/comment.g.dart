@@ -17,11 +17,12 @@ class CommentAdapter extends TypeAdapter<Comment> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Comment(
-      user: fields[0] as User,
+      id: fields[4] as String?,
+      userUid: fields[0] as String,
       topic: fields[1] as Commentable,
       text: fields[2] as String,
-      date: fields[3] as DateTime,
-    )..id = fields[4] as String;
+      date: fields[3] as DateTime?,
+    );
   }
 
   @override
@@ -31,7 +32,7 @@ class CommentAdapter extends TypeAdapter<Comment> {
       ..writeByte(4)
       ..write(obj.id)
       ..writeByte(0)
-      ..write(obj.user)
+      ..write(obj.userUid)
       ..writeByte(1)
       ..write(obj.topic)
       ..writeByte(2)

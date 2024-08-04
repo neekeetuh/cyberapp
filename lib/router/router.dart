@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cyberapp/features/auth/presentation/view/view.dart';
+import 'package:cyberapp/features/discussions/presentation/view/view.dart';
 import 'package:cyberapp/features/home_screen/view/view.dart';
 import 'package:cyberapp/features/match_detail_screen/view/view.dart';
 import 'package:cyberapp/features/matches/domain/domain.dart';
@@ -48,6 +49,10 @@ class AppRouter extends _$AppRouter {
             AutoRoute(
               page: FakeMatchesRoute.page,
               path: 'fake_matches',
+            ),
+            AutoRoute(
+              page: DiscussionsRoute.page,
+              path: 'discussions',
             ),
           ],
         ),
