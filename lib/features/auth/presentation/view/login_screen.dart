@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:cyberapp/features/auth/presentation/data/data.dart';
 import 'package:cyberapp/router/router.dart';
 import 'package:cyberapp/ui/services/services.dart';
+import 'package:cyberapp/ui/ui.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -22,71 +23,75 @@ class LoginScreen extends HookConsumerWidget {
       appBar: AppBar(
         title: const Text('Signing In'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(30),
-        child: Form(
-          key: formKey,
-          child: Column(
-            children: [
-              TextFormField(
-                keyboardType: TextInputType.emailAddress,
-                controller: emailController,
-                autocorrect: false,
-                validator: (email) =>
-                email != null && !EmailValidator.validate(email)
-                    ? 'Enter a correct email'
-                    : null,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Enter an email',
+      body: Container(
+        decoration: BoxDecoration(
+            color: primaryColor.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(30)),
+        margin: const EdgeInsets.all(15),
+        height: MediaQuery.of(context).size.height / 2.5,
+        child: Padding(
+          padding: const EdgeInsets.all(30),
+          child: Form(
+            key: formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextFormField(
+                  keyboardType: TextInputType.emailAddress,
+                  controller: emailController,
+                  autocorrect: false,
+                  validator: (email) =>
+                  email != null && !EmailValidator.validate(email)
+                      ? 'Enter a correct email'
+                      : null,
+                  decoration: const InputDecoration(
+                    border: UnderlineInputBorder(),
+                    hintText: 'Enter an email',
+                  ),
                 ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                controller: passwordController,
-                autocorrect: false,
-                obscureText: isPasswordHidden.value,
-                validator: (password) => password != null && password.length < 6
-                    ? 'Enter a password with at least 6 symbols in it'
-                    : null,
-                decoration: InputDecoration(
-                    border: const OutlineInputBorder(),
-                    hintText: 'Enter a password',
-                    suffix: InkWell(
-                      onTap: () {
-                        isPasswordHidden.value = !isPasswordHidden.value;
-                      },
-                      child: Icon(
-                        isPasswordHidden.value
-                            ? Icons.visibility_off
-                            : Icons.visibility,
-                        color: Colors.black,
-                      ),
-                    )),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              ElevatedButton(
-                  onPressed: () async {
-                    await login(context, formKey, emailController.text, passwordController.text);
-                    ref.invalidate(currentUserProvider);
-                  },
-                  child: const Center(
-                    child: Text('Sign in'),
-                  )),
-              const SizedBox(
-                height: 20,
-              ),
-              TextButton(onPressed: () {
-                AutoRouter.of(context).push(const SignupRoute());
-              }, child: const Text('Sign up')),
-            ],
+                const SizedBox(
+                  height: 20,
+                ),
+                TextFormField(
+                  controller: passwordController,
+                  autocorrect: false,
+                  obscureText: isPasswordHidden.value,
+                  validator: (password) =>
+                  password != null && password.length < 6
+                      ? 'Enter a password with at least 6 symbols in it'
+                      : null,
+                  decoration: InputDecoration(
+                      border: const UnderlineInputBorder(),
+                      hintText: 'Enter a password',
+                      suffix: InkWell(
+                        onTap: () {
+                          isPasswordHidden.value = !isPasswordHidden.value;
+                        },
+                        child: Icon(
+                          isPasswordHidden.value
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                          color: Colors.black,
+                        ),
+                      )),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                CustomizedButton(
+                    onPressed: () async {
+                      await login(context, formKey, emailController.text,
+                          passwordController.text);
+                      ref.invalidate(currentUserProvider);
+                    },
+                    text: 'Sign in'),
+                TextButton(
+                    onPressed: () {
+                      AutoRouter.of(context).push(const SignupRoute());
+                    },
+                    child: const Text('Sign up')),
+              ],
+            ),
           ),
         ),
       ),

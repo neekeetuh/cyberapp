@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cyberapp/features/auth/presentation/data/data.dart';
 import 'package:cyberapp/ui/services/services.dart';
+import 'package:cyberapp/ui/ui.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -22,11 +23,17 @@ class SignupScreen extends HookConsumerWidget {
       appBar: AppBar(
         title: const Text('Signing up'),
       ),
-      body: Padding(
+      body: Container(
+        decoration: BoxDecoration(
+            color: primaryColor.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(30)),
+        margin: const EdgeInsets.all(15),
+        height: MediaQuery.of(context).size.height / 2,
         padding: const EdgeInsets.all(30),
         child: Form(
           key: formKey,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TextFormField(
                 keyboardType: TextInputType.emailAddress,
@@ -37,7 +44,7 @@ class SignupScreen extends HookConsumerWidget {
                         ? 'Enter a correct email'
                         : null,
                 decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
+                  border: UnderlineInputBorder(),
                   hintText: 'Enter an email',
                 ),
               ),
@@ -52,7 +59,7 @@ class SignupScreen extends HookConsumerWidget {
                     ? 'Enter a password with at least 6 symbols in it'
                     : null,
                 decoration: InputDecoration(
-                    border: const OutlineInputBorder(),
+                    border: const UnderlineInputBorder(),
                     hintText: 'Enter a password',
                     suffix: InkWell(
                       onTap: () {
@@ -77,7 +84,7 @@ class SignupScreen extends HookConsumerWidget {
                     ? 'Enter a password with at least 6 symbols in it'
                     : null,
                 decoration: InputDecoration(
-                    border: const OutlineInputBorder(),
+                    border: const UnderlineInputBorder(),
                     hintText: 'Enter a password',
                     suffix: InkWell(
                       onTap: () {
@@ -94,7 +101,7 @@ class SignupScreen extends HookConsumerWidget {
               const SizedBox(
                 height: 20,
               ),
-              ElevatedButton(
+              CustomizedButton(
                   onPressed: () async {
                     await signUp(
                       context,
@@ -105,12 +112,7 @@ class SignupScreen extends HookConsumerWidget {
                     );
                     ref.invalidate(currentUserProvider);
                   },
-                  child: const Center(
-                    child: Text('Sign up'),
-                  )),
-              const SizedBox(
-                height: 20,
-              ),
+                  text: 'Sign up'),
               TextButton(
                   onPressed: () {
                     AutoRouter.of(context).popUntilRoot();

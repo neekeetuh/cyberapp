@@ -1,6 +1,8 @@
 import 'package:auto_route/annotations.dart';
 import 'package:cyberapp/features/auth/presentation/data/users_repository.dart';
 import 'package:cyberapp/features/discussions/bloc/discussions_bloc.dart';
+import 'package:cyberapp/features/discussions/presentation/widgets/widgets.dart';
+import 'package:cyberapp/ui/ui.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,35 +39,35 @@ class DiscussionsScreen extends HookConsumerWidget {
           ),
           SliverToBoxAdapter(
             child: currentUser != null
-                ? Form(
-                    key: formKey,
-                    child: Column(
-                      children: [
-                        TextFormField(
-                          controller: topicController,
-                          decoration: const InputDecoration(hintText: 'Topic'),
-                        ),
-                        TextFormField(
-                            controller: descriptionController,
-                            decoration:
-                                const InputDecoration(hintText: 'Description')),
-                        ElevatedButton(
-                            onPressed: () {
-                              context
-                                  .read<DiscussionsBloc>()
-                                  .add(CreateDiscussion(
-                                    topic: topicController.text,
-                                    description: descriptionController.text,
-                                  ));
-                              context
-                                  .read<DiscussionsBloc>()
-                                  .add(LoadDiscussions());
-                            },
-                            child: const Center(
-                              child: Text('Create'),
-                            ))
-                      ],
-                    ))
+                ? Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    child: Form(
+                        key: formKey,
+                        child: Column(
+                          children: [
+                            TextFormField(
+                              controller: topicController,
+                              decoration:
+                                  const InputDecoration(hintText: 'Topic'),
+                            ),
+                            TextFormField(
+                                controller: descriptionController,
+                                decoration: const InputDecoration(
+                                    hintText: 'Description')),
+                            const SizedBox(
+                              height: 30,
+                            ),
+                            CustomizedButton(
+                                text: 'Create',
+                                onPressed: () {
+                                  _onPressCreateButton(
+                                      context,
+                                      topicController.text,
+                                      descriptionController.text);
+                                }),
+                          ],
+                        )),
+                  )
                 : const Center(child: Text('Sign in to create a discussion')),
           ),
           const SliverToBoxAdapter(
@@ -84,18 +86,8 @@ class DiscussionsScreen extends HookConsumerWidget {
                 return SliverList.builder(
                     itemCount: state.discussions.length,
                     itemBuilder: (context, index) {
-                      return Container(
-                        padding: const EdgeInsets.all(10),
-                        height: 100,
-                        child: Column(
-                          children: [
-                            Text(
-                              state.discussions[index].topic,
-                              style: Theme.of(context).textTheme.titleMedium,
-                            ),
-                            Text(state.discussions[index].userUid)
-                          ],
-                        ),
+                      return DiscussionCard(
+                        discussion: state.discussions[index],
                       );
                     });
               }
@@ -115,5 +107,14 @@ class DiscussionsScreen extends HookConsumerWidget {
         ],
       ),
     );
+  }
+
+  Future<void> _onPressCreateButton (
+      BuildContext context, String topic, String description) async {
+    context.read<DiscussionsBloc>().add(CreateDiscussion(
+          topic: topic,
+          description: description,
+        ));
+    context.read<DiscussionsBloc>().add(LoadDiscussions());
   }
 }

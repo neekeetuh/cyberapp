@@ -73,12 +73,18 @@ class MatchesScreen extends ConsumerWidget {
               child: Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Center(
-                    child: Text(
-                  'LIVE',
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleMedium
-                      ?.copyWith(color: Colors.red),
+                    child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const LiveRepeatingIndicator(),
+                    Text(
+                      'LIVE',
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleMedium
+                          ?.copyWith(color: Colors.red),
+                    ),
+                  ],
                 )),
               ),
             ),
@@ -86,7 +92,9 @@ class MatchesScreen extends ConsumerWidget {
                 ? LiveMatchesGrid(
                     matches: liveMatches,
                   )
-                : const SliverToBoxAdapter(child: Center(child: Text('No live matches at the moment'))),
+                : const SliverToBoxAdapter(
+                    child:
+                        Center(child: Text('No live matches at the moment'))),
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
@@ -116,10 +124,10 @@ class MatchesScreen extends ConsumerWidget {
                           child: UpcomingMatchMiniCard(match: match));
                     })
                 : const SliverToBoxAdapter(
-                  child: Center(
+                    child: Center(
                       child: Text('No upcoming matches'),
                     ),
-                ),
+                  ),
           ],
         );
       }, error: (error, st) {
