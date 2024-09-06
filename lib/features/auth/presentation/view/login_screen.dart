@@ -13,12 +13,13 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class LoginScreen extends HookConsumerWidget {
   const LoginScreen({super.key});
 
+  static final formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isPasswordHidden = useState<bool>(true);
     final emailController = useTextEditingController(text: '');
     final passwordController = useTextEditingController(text: '');
-    final formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Signing In'),

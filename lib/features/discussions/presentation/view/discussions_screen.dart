@@ -13,12 +13,13 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class DiscussionsScreen extends HookConsumerWidget {
   const DiscussionsScreen({super.key});
 
+  static final formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     context.read<DiscussionsBloc>().add(LoadDiscussions());
     final topicController = useTextEditingController(text: '');
     final descriptionController = useTextEditingController(text: '');
-    final formKey = GlobalKey<FormState>();
     final currentUser = ref.watch(currentUserProvider);
     // final currentUser = FirebaseAuth.instance.currentUser;
     return RefreshIndicator(
@@ -109,7 +110,7 @@ class DiscussionsScreen extends HookConsumerWidget {
     );
   }
 
-  Future<void> _onPressCreateButton (
+  Future<void> _onPressCreateButton(
       BuildContext context, String topic, String description) async {
     context.read<DiscussionsBloc>().add(CreateDiscussion(
           topic: topic,
