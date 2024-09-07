@@ -25,6 +25,16 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    DiscussionDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<DiscussionDetailRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: DiscussionDetailScreen(
+          key: args.key,
+          discussion: args.discussion,
+        ),
+      );
+    },
     DiscussionsRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -193,6 +203,44 @@ class AccountRouteArgs {
   @override
   String toString() {
     return 'AccountRouteArgs{key: $key, user: $user}';
+  }
+}
+
+/// generated route for
+/// [DiscussionDetailScreen]
+class DiscussionDetailRoute extends PageRouteInfo<DiscussionDetailRouteArgs> {
+  DiscussionDetailRoute({
+    Key? key,
+    required Discussion discussion,
+    List<PageRouteInfo>? children,
+  }) : super(
+          DiscussionDetailRoute.name,
+          args: DiscussionDetailRouteArgs(
+            key: key,
+            discussion: discussion,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'DiscussionDetailRoute';
+
+  static const PageInfo<DiscussionDetailRouteArgs> page =
+      PageInfo<DiscussionDetailRouteArgs>(name);
+}
+
+class DiscussionDetailRouteArgs {
+  const DiscussionDetailRouteArgs({
+    this.key,
+    required this.discussion,
+  });
+
+  final Key? key;
+
+  final Discussion discussion;
+
+  @override
+  String toString() {
+    return 'DiscussionDetailRouteArgs{key: $key, discussion: $discussion}';
   }
 }
 

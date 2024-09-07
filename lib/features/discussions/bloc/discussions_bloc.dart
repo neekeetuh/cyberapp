@@ -9,7 +9,7 @@ part 'discussions_event.dart';
 part 'discussions_state.dart';
 
 class DiscussionsBloc extends Bloc<DiscussionsEvent, DiscussionsState> {
-  final DiscussionsRepository repository;
+  final DiscussionsRepositoryInterface repository;
 
   DiscussionsBloc(this.repository) : super(DiscussionsInitial()) {
     on<LoadDiscussions>(onLoadDiscussions);

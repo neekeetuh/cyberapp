@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cyberapp/features/auth/presentation/view/view.dart';
+import 'package:cyberapp/features/discussions/domain/domain.dart';
 import 'package:cyberapp/features/discussions/presentation/view/view.dart';
 import 'package:cyberapp/features/home_screen/view/view.dart';
 import 'package:cyberapp/features/match_detail_screen/view/view.dart';
@@ -83,6 +84,10 @@ class AppRouter extends _$AppRouter {
         AutoRoute(
           page: UpcomingMatchRoute.page,
           path: '/upcoming_match',
+        ),
+        AutoRoute(
+          page: DiscussionDetailRoute.page,
+          path: '/discussion_detail',
         ),
         AutoRoute(
           page: MatchDetailRoute.page,

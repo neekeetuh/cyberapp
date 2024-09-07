@@ -1,7 +1,9 @@
+import 'package:cyberapp/features/discussions/data/data.dart';
 import 'package:cyberapp/features/discussions/domain/domain.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
-import 'package:uuid/uuid.dart';
 
 part 'discussion.g.dart';
 
@@ -36,5 +38,21 @@ class Discussion extends Equatable implements Commentable {
     this.likesCount = 0,
     this.dislikesCount = 0,
   });
+
+  @override
+  Future<List<Comment>> getComments() async {
+    return GetIt.I<CommentsRepository>().getComments(this);
+  }
+
+  @override
+  Future<void> leaveComment(String commentText) async {
+    final currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser != null) {
+      GetIt.I<CommentsRepository>()
+          .createComment(currentUser, this, commentText);
+      return;
+    }
+    throw Exception('could not find current user');
+  }
 //</editor-fold>
 }

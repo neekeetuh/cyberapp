@@ -1,7 +1,8 @@
-import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:cyberapp/features/auth/presentation/data/users_repository.dart';
 import 'package:cyberapp/features/discussions/bloc/discussions_bloc.dart';
 import 'package:cyberapp/features/discussions/presentation/widgets/widgets.dart';
+import 'package:cyberapp/router/router.dart';
 import 'package:cyberapp/ui/ui.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -87,8 +88,14 @@ class DiscussionsScreen extends HookConsumerWidget {
                 return SliverList.builder(
                     itemCount: state.discussions.length,
                     itemBuilder: (context, index) {
-                      return DiscussionCard(
-                        discussion: state.discussions[index],
+                      return GestureDetector(
+                        onTap: () {
+                          AutoRouter.of(context).push(DiscussionDetailRoute(
+                              discussion: state.discussions[index]));
+                        },
+                        child: DiscussionCard(
+                          discussion: state.discussions[index],
+                        ),
                       );
                     });
               }

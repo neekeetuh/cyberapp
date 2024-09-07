@@ -8,7 +8,7 @@ part 'comment.g.dart';
 @HiveType(typeId: 1)
 class Comment extends Equatable {
   @HiveField(4)
-  late final String id;
+  final String id;
   @HiveField(0)
   final String userUid;
   @HiveField(1)
@@ -16,22 +16,19 @@ class Comment extends Equatable {
   @HiveField(2)
   final String text;
   @HiveField(3)
-  late final DateTime date;
+  final DateTime date;
+
+  const Comment(
+      {required this.id,
+      required this.userUid,
+      required this.topic,
+      required this.text,
+      required this.date});
 
   @override
   List<Object?> get props => [userUid, topic, text, date];
 
 //<editor-fold desc="Data Methods">
-  Comment({
-    String? id,
-    required this.userUid,
-    required this.topic,
-    required this.text,
-    DateTime? date,
-  }) {
-    id = const Uuid().v4();
-    date = DateTime.now();
-  }
 
   @override
   bool operator ==(Object other) =>
