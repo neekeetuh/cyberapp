@@ -1,7 +1,6 @@
-import 'package:cyberapp/features/discussions/domain/domain.dart';
+import 'package:cyberapp/core/comments/domain/domain.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
-import 'package:uuid/uuid.dart';
 
 part 'comment.g.dart';
 

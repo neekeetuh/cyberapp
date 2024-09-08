@@ -1,3 +1,5 @@
+import 'package:cyberapp/core/comments/data/data.dart';
+import 'package:cyberapp/core/comments/domain/domain.dart';
 import 'package:cyberapp/features/discussions/data/data.dart';
 import 'package:cyberapp/features/discussions/domain/domain.dart';
 import 'package:cyberapp/router/router.dart';

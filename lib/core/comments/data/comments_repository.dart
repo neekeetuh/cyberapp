@@ -1,5 +1,5 @@
-import 'package:cyberapp/features/discussions/data/comments_repository_interface.dart';
-import 'package:cyberapp/features/discussions/domain/domain.dart';
+import 'package:cyberapp/core/comments/data/data.dart';
+import 'package:cyberapp/core/comments/domain/domain.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hive/hive.dart';
 import 'package:uuid/uuid.dart';
@@ -27,6 +27,7 @@ class CommentsRepository implements CommentsRepositoryInterface {
 
   @override
   Future<List<Comment>> getComments(Commentable topic) async {
-    return commentsBox.values.where((value) => value.topic == topic).toList();
+    return commentsBox.values.where((value) => value.topic == topic).toList()
+      ..sort((a, b) => b.date.compareTo(a.date));
   }
 }

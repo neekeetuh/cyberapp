@@ -1,3 +1,5 @@
+import 'package:cyberapp/core/comments/bloc/comments_bloc/comments_bloc.dart';
+import 'package:cyberapp/core/comments/data/data.dart';
 import 'package:cyberapp/features/discussions/bloc/discussions_bloc.dart';
 import 'package:cyberapp/features/discussions/data/data.dart';
 import 'package:cyberapp/router/router.dart';
@@ -17,7 +19,11 @@ class CyberApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) =>
-              DiscussionsBloc(GetIt.I<DiscussionsRepository>()),
+              DiscussionsBloc(repository: GetIt.I<DiscussionsRepository>()),
+        ),
+        BlocProvider(
+          create: (context) =>
+              CommentsBloc(repository: GetIt.I<CommentsRepository>()),
         ),
       ],
       child: MaterialApp.router(

@@ -11,7 +11,7 @@ part 'discussions_state.dart';
 class DiscussionsBloc extends Bloc<DiscussionsEvent, DiscussionsState> {
   final DiscussionsRepositoryInterface repository;
 
-  DiscussionsBloc(this.repository) : super(DiscussionsInitial()) {
+  DiscussionsBloc({required this.repository}) : super(DiscussionsInitial()) {
     on<LoadDiscussions>(onLoadDiscussions);
     on<CreateDiscussion>(onCreateDiscussion);
   }
