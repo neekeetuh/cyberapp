@@ -41,12 +41,6 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const DiscussionsScreen(),
       );
     },
-    FakeMatchesRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const FakeMatchesScreen(),
-      );
-    },
     HomeRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -67,16 +61,6 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const LoginScreen(),
-      );
-    },
-    MatchDetailRoute.name: (routeData) {
-      final args = routeData.argsAs<MatchDetailRouteArgs>();
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: MatchDetailScreen(
-          key: args.key,
-          match: args.match,
-        ),
       );
     },
     MatchResultRoute.name: (routeData) {
@@ -117,16 +101,6 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const NewsScreen(),
       );
     },
-    PlayerRoute.name: (routeData) {
-      final args = routeData.argsAs<PlayerRouteArgs>();
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: PlayerScreen(
-          key: args.key,
-          player: args.player,
-        ),
-      );
-    },
     RankingsRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -143,16 +117,6 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const StatsScreen(),
-      );
-    },
-    TeamRoute.name: (routeData) {
-      final args = routeData.argsAs<TeamRouteArgs>();
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: TeamScreen(
-          key: args.key,
-          team: args.team,
-        ),
       );
     },
     UpcomingMatchRoute.name: (routeData) {
@@ -259,20 +223,6 @@ class DiscussionsRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [FakeMatchesScreen]
-class FakeMatchesRoute extends PageRouteInfo<void> {
-  const FakeMatchesRoute({List<PageRouteInfo>? children})
-      : super(
-          FakeMatchesRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'FakeMatchesRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
 /// [HomeScreen]
 class HomeRoute extends PageRouteInfo<void> {
   const HomeRoute({List<PageRouteInfo>? children})
@@ -336,44 +286,6 @@ class LoginRoute extends PageRouteInfo<void> {
   static const String name = 'LoginRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [MatchDetailScreen]
-class MatchDetailRoute extends PageRouteInfo<MatchDetailRouteArgs> {
-  MatchDetailRoute({
-    Key? key,
-    required FakeMatchData match,
-    List<PageRouteInfo>? children,
-  }) : super(
-          MatchDetailRoute.name,
-          args: MatchDetailRouteArgs(
-            key: key,
-            match: match,
-          ),
-          initialChildren: children,
-        );
-
-  static const String name = 'MatchDetailRoute';
-
-  static const PageInfo<MatchDetailRouteArgs> page =
-      PageInfo<MatchDetailRouteArgs>(name);
-}
-
-class MatchDetailRouteArgs {
-  const MatchDetailRouteArgs({
-    this.key,
-    required this.match,
-  });
-
-  final Key? key;
-
-  final FakeMatchData match;
-
-  @override
-  String toString() {
-    return 'MatchDetailRouteArgs{key: $key, match: $match}';
-  }
 }
 
 /// generated route for
@@ -495,43 +407,6 @@ class NewsRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [PlayerScreen]
-class PlayerRoute extends PageRouteInfo<PlayerRouteArgs> {
-  PlayerRoute({
-    Key? key,
-    required Player player,
-    List<PageRouteInfo>? children,
-  }) : super(
-          PlayerRoute.name,
-          args: PlayerRouteArgs(
-            key: key,
-            player: player,
-          ),
-          initialChildren: children,
-        );
-
-  static const String name = 'PlayerRoute';
-
-  static const PageInfo<PlayerRouteArgs> page = PageInfo<PlayerRouteArgs>(name);
-}
-
-class PlayerRouteArgs {
-  const PlayerRouteArgs({
-    this.key,
-    required this.player,
-  });
-
-  final Key? key;
-
-  final Player player;
-
-  @override
-  String toString() {
-    return 'PlayerRouteArgs{key: $key, player: $player}';
-  }
-}
-
-/// generated route for
 /// [RankingsScreen]
 class RankingsRoute extends PageRouteInfo<void> {
   const RankingsRoute({List<PageRouteInfo>? children})
@@ -571,43 +446,6 @@ class StatsRoute extends PageRouteInfo<void> {
   static const String name = 'StatsRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [TeamScreen]
-class TeamRoute extends PageRouteInfo<TeamRouteArgs> {
-  TeamRoute({
-    Key? key,
-    required Team team,
-    List<PageRouteInfo>? children,
-  }) : super(
-          TeamRoute.name,
-          args: TeamRouteArgs(
-            key: key,
-            team: team,
-          ),
-          initialChildren: children,
-        );
-
-  static const String name = 'TeamRoute';
-
-  static const PageInfo<TeamRouteArgs> page = PageInfo<TeamRouteArgs>(name);
-}
-
-class TeamRouteArgs {
-  const TeamRouteArgs({
-    this.key,
-    required this.team,
-  });
-
-  final Key? key;
-
-  final Team team;
-
-  @override
-  String toString() {
-    return 'TeamRouteArgs{key: $key, team: $team}';
-  }
 }
 
 /// generated route for

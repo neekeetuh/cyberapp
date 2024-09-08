@@ -33,10 +33,6 @@ class HomeScreen extends ConsumerWidget {
         icon: Icon(Icons.topic_outlined),
         label: 'Discussions',
       ),
-      const FakeMatchesRoute(): const BottomNavigationBarItem(
-        icon: Icon(Icons.gamepad_outlined),
-        label: 'Fake Matches',
-      ),
     };
     return AutoTabsRouter(
         routes: tabs.keys.toList(),
