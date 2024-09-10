@@ -1,10 +1,9 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:cyberapp/features/auth/presentation/data/users_repository.dart';
-import 'package:cyberapp/features/discussions/bloc/discussions_bloc.dart';
-import 'package:cyberapp/features/discussions/presentation/widgets/widgets.dart';
+import 'package:cyberapp/features/auth/presentation/providers.dart';
+import 'package:cyberapp/features/discussions/presentation/discussions_list/bloc/discussions_bloc.dart';
+import 'package:cyberapp/features/discussions/presentation/discussions_list/widgets/widgets.dart';
 import 'package:cyberapp/router/router.dart';
 import 'package:cyberapp/ui/ui.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -22,7 +21,6 @@ class DiscussionsScreen extends HookConsumerWidget {
     final topicController = useTextEditingController(text: '');
     final descriptionController = useTextEditingController(text: '');
     final currentUser = ref.watch(currentUserProvider);
-    // final currentUser = FirebaseAuth.instance.currentUser;
     return RefreshIndicator(
       onRefresh: () async {
         context.read<DiscussionsBloc>().add(LoadDiscussions());

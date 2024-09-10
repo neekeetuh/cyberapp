@@ -1,8 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cyberapp/features/auth/presentation/view/view.dart';
 import 'package:cyberapp/features/discussions/domain/domain.dart';
-import 'package:cyberapp/features/discussions/presentation/view/view.dart';
-import 'package:cyberapp/features/home_screen/view/view.dart';
+import 'package:cyberapp/features/discussions/presentation/discussion_detail/view/discussion_detail_screen.dart';
+import 'package:cyberapp/features/discussions/presentation/discussions_list/view/view.dart';
+import 'package:cyberapp/features/home_screen.dart';
 import 'package:cyberapp/features/matches/domain/domain.dart';
 import 'package:cyberapp/features/matches/presentation/match_detail/view/view.dart';
 import 'package:cyberapp/features/matches/presentation/matches_list/view/view.dart';

@@ -1,4 +1,4 @@
-import 'package:cyberapp/features/rankings/data/regions.dart';
+import 'package:cyberapp/features/rankings/domain/regions.dart';
 import 'package:cyberapp/features/rankings/data/data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

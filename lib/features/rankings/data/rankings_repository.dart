@@ -1,4 +1,4 @@
-import 'package:cyberapp/features/rankings/data/regions.dart';
+import 'package:cyberapp/features/rankings/domain/regions.dart';
 import 'package:cyberapp/features/rankings/domain/domain.dart';
 import 'package:dio/dio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';

@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:cyberapp/features/auth/presentation/data/data.dart';
+import 'package:cyberapp/features/auth/presentation/providers.dart';
 import 'package:cyberapp/ui/services/services.dart';
 import 'package:cyberapp/ui/ui.dart';
 import 'package:email_validator/email_validator.dart';

@@ -1,4 +1,4 @@
-import 'package:cyberapp/core/comments/domain/comment.dart';
+import 'package:cyberapp/features/comments/domain/domain.dart';
 
 abstract interface class Commentable {
   Future<void> leaveComment(String commentText);

@@ -1,7 +1,6 @@
-import 'package:cyberapp/core/comments/data/data.dart';
-import 'package:cyberapp/core/comments/domain/domain.dart';
-import 'package:cyberapp/features/discussions/data/data.dart';
-import 'package:cyberapp/features/discussions/domain/domain.dart';
+
+import 'package:cyberapp/features/comments/data/data.dart';
+import 'package:cyberapp/features/comments/domain/domain.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';

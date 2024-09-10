@@ -1,10 +1,9 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:cyberapp/features/auth/presentation/data/data.dart';
+import 'package:cyberapp/features/auth/presentation/providers.dart';
 import 'package:cyberapp/ui/ui.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hive/hive.dart';
 
 @RoutePage()
 class AccountScreen extends ConsumerWidget {

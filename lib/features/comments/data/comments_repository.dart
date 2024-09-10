@@ -1,5 +1,4 @@
-import 'package:cyberapp/core/comments/data/data.dart';
-import 'package:cyberapp/core/comments/domain/domain.dart';
+import 'package:cyberapp/features/comments/domain/domain.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hive/hive.dart';
 import 'package:uuid/uuid.dart';

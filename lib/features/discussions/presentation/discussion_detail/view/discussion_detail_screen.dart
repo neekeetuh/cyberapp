@@ -1,7 +1,8 @@
 import 'package:auto_route/annotations.dart';
-import 'package:cyberapp/core/comments/bloc/comments_bloc/comments_bloc.dart';
+import 'package:cyberapp/features/comments/presentation/bloc/comments_bloc/comments_bloc.dart';
+import 'package:cyberapp/features/comments/presentation/widgets/widgets.dart';
 import 'package:cyberapp/features/discussions/domain/domain.dart';
-import 'package:cyberapp/features/discussions/presentation/widgets/widgets.dart';
+import 'package:cyberapp/features/discussions/presentation/discussion_detail/widgets/widgets.dart';
 import 'package:cyberapp/ui/ui.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,7 @@ class DiscussionDetailScreen extends StatelessWidget {
                 child: currentUser != null
                     ? Padding(
                         padding: const EdgeInsets.only(top: 15.0),
-                        child: LeaveCommentSection(discussion: discussion),
+                        child: LeaveCommentSection(commentable: discussion),
                       )
                     : Container(
                         margin: const EdgeInsets.only(top: 20),

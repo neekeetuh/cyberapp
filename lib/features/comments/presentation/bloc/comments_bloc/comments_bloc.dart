@@ -1,6 +1,5 @@
 import 'dart:async';
-import 'package:cyberapp/core/comments/data/data.dart';
-import 'package:cyberapp/core/comments/domain/domain.dart';
+import 'package:cyberapp/features/comments/domain/domain.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

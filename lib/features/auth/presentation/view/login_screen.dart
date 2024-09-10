@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:cyberapp/features/auth/presentation/data/data.dart';
+import 'package:cyberapp/features/auth/presentation/providers.dart';
 import 'package:cyberapp/router/router.dart';
 import 'package:cyberapp/ui/services/services.dart';
 import 'package:cyberapp/ui/ui.dart';
@@ -42,9 +42,9 @@ class LoginScreen extends HookConsumerWidget {
                   controller: emailController,
                   autocorrect: false,
                   validator: (email) =>
-                  email != null && !EmailValidator.validate(email)
-                      ? 'Enter a correct email'
-                      : null,
+                      email != null && !EmailValidator.validate(email)
+                          ? 'Enter a correct email'
+                          : null,
                   decoration: const InputDecoration(
                     border: UnderlineInputBorder(),
                     hintText: 'Enter an email',
@@ -58,9 +58,9 @@ class LoginScreen extends HookConsumerWidget {
                   autocorrect: false,
                   obscureText: isPasswordHidden.value,
                   validator: (password) =>
-                  password != null && password.length < 6
-                      ? 'Enter a password with at least 6 symbols in it'
-                      : null,
+                      password != null && password.length < 6
+                          ? 'Enter a password with at least 6 symbols in it'
+                          : null,
                   decoration: InputDecoration(
                       border: const UnderlineInputBorder(),
                       hintText: 'Enter a password',
@@ -101,11 +101,11 @@ class LoginScreen extends HookConsumerWidget {
 }
 
 Future<void> login(
-    BuildContext context,
-    GlobalKey<FormState> formKey,
-    String email,
-    String password,
-    ) async {
+  BuildContext context,
+  GlobalKey<FormState> formKey,
+  String email,
+  String password,
+) async {
   final isValid = formKey.currentState!.validate();
   if (!isValid) return;
 

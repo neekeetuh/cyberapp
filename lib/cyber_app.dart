@@ -1,7 +1,7 @@
-import 'package:cyberapp/core/comments/bloc/comments_bloc/comments_bloc.dart';
-import 'package:cyberapp/core/comments/data/data.dart';
-import 'package:cyberapp/features/discussions/bloc/discussions_bloc.dart';
+import 'package:cyberapp/features/comments/presentation/bloc/comments_bloc/comments_bloc.dart';
+import 'package:cyberapp/features/comments/data/data.dart';
 import 'package:cyberapp/features/discussions/data/data.dart';
+import 'package:cyberapp/features/discussions/presentation/discussions_list/bloc/discussions_bloc.dart';
 import 'package:cyberapp/router/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

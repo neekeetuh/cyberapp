@@ -41,7 +41,7 @@ class NewsData extends Equatable {
     return date;
   }
 
-  String get dateToString{
+  String get dateToString {
     return _dateTimeToJson(date);
   }
 

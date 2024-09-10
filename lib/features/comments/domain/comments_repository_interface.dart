@@ -1,4 +1,4 @@
-import 'package:cyberapp/core/comments/domain/domain.dart';
+import 'package:cyberapp/features/comments/domain/domain.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 abstract interface class CommentsRepositoryInterface {

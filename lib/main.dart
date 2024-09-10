@@ -1,6 +1,6 @@
-import 'package:cyberapp/core/comments/domain/domain.dart';
 import 'package:cyberapp/cyber_app.dart';
 import 'package:cyberapp/di/di_container.dart';
+import 'package:cyberapp/features/comments/domain/domain.dart';
 import 'package:cyberapp/features/discussions/domain/domain.dart';
 import 'package:cyberapp/router/router.dart';
 import 'package:firebase_core/firebase_core.dart';
