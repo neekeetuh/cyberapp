@@ -1,4 +1,4 @@
-import 'package:cyberapp/features/stats/data/stats_repository.dart';
+import 'package:cyberapp/features/stats/data/repositories/stats_repository.dart';
 import 'package:cyberapp/features/stats/domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

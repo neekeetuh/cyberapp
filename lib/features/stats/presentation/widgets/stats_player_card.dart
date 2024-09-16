@@ -26,8 +26,10 @@ class StatsPlayerCard extends StatelessWidget {
                 width: 30,
                 child: Text(
                   (rank).toString(),
-                  style:
-                      Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 14),
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyLarge
+                      ?.copyWith(fontSize: 14),
                 ),
               ),
               const SizedBox(
@@ -36,8 +38,10 @@ class StatsPlayerCard extends StatelessWidget {
               Expanded(
                   child: Text(
                 stats.playerName,
-                style:
-                    Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 18),
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyLarge
+                    ?.copyWith(fontSize: 18),
               )),
               SizedBox(
                 width: 150,
@@ -49,14 +53,20 @@ class StatsPlayerCard extends StatelessWidget {
                       style: TextStyle(
                         color: double.parse(stats.rating) >= 1.1
                             ? Colors.green
-                            : double.parse(stats.rating) >= 0.9 ? Colors.blueGrey: Colors.red,
-                        fontWeight: FontWeight.w600,fontSize: 16,
+                            : double.parse(stats.rating) >= 0.9
+                                ? Colors.blueGrey
+                                : Colors.red,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 16,
                       ),
                     ),
                     const SizedBox(
                       width: 20,
                     ),
-                    Text(stats.teamTag, style: Theme.of(context).textTheme.bodyLarge,),
+                    Text(
+                      stats.teamTag,
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
                   ],
                 ),
               ),

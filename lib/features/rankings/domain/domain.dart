@@ -1,4 +1,3 @@
-//GENERATED BARREL FILE 
-export 'ranking_team.dart';
-export 'regions.dart';
+//GENERATED BARREL FILE
+export 'entities/entities.dart';
 

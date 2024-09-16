@@ -1,4 +1,4 @@
 //GENERATED BARREL FILE 
-export 'discussion.dart';
-export 'discussions_repository_interface.dart';
+export 'entities/discussion.dart';
+export 'repositories/repositories.dart';
 

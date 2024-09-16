@@ -1,2 +1,3 @@
 //GENERATED BARREL FILE 
-export 'matches_repository.dart'; 
+export 'repositories/repositories.dart';
+export 'dto/dto.dart';

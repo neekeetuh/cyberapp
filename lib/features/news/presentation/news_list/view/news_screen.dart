@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:cyberapp/features/news/data/news_repository.dart';
+import 'package:cyberapp/features/news/data/repositories/news_repository.dart';
 import 'package:cyberapp/features/news/presentation/news_list/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

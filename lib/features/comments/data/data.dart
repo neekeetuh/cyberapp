@@ -1,3 +1,3 @@
 //GENERATED BARREL FILE 
-export 'comments_repository.dart'; 
+export 'repositories/repositories.dart';
 

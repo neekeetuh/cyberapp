@@ -1,4 +1,4 @@
-import 'package:cyberapp/features/comments/presentation/bloc/comments_bloc/comments_bloc.dart';
+import 'package:cyberapp/features/comments/presentation/bloc/comments_bloc.dart';
 import 'package:cyberapp/features/comments/data/data.dart';
 import 'package:cyberapp/features/discussions/data/data.dart';
 import 'package:cyberapp/features/discussions/presentation/discussions_list/bloc/discussions_bloc.dart';

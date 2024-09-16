@@ -1,5 +1,4 @@
 import 'package:cyberapp/features/rankings/domain/domain.dart';
-import 'package:cyberapp/ui/theme/theme.dart';
 import 'package:cyberapp/ui/ui.dart';
 import 'package:flutter/material.dart';
 

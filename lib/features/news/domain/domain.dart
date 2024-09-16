@@ -1,2 +1,2 @@
 //GENERATED BARREL FILE 
-export 'news_data.dart'; 
+export 'entities/entities.dart';

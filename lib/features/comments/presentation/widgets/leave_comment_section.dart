@@ -1,5 +1,5 @@
 import 'package:cyberapp/features/comments/domain/domain.dart';
-import 'package:cyberapp/features/comments/presentation/bloc/comments_bloc/comments_bloc.dart';
+import 'package:cyberapp/features/comments/presentation/bloc/comments_bloc.dart';
 import 'package:cyberapp/ui/ui.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
