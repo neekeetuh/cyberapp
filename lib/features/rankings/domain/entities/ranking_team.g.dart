@@ -24,13 +24,14 @@ class RankingTeamAdapter extends TypeAdapter<RankingTeam> {
       record: fields[4] as String,
       earnings: fields[5] as String,
       logo: fields[6] as String,
+      regionCode: fields[7] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, RankingTeam obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -44,7 +45,9 @@ class RankingTeamAdapter extends TypeAdapter<RankingTeam> {
       ..writeByte(5)
       ..write(obj.earnings)
       ..writeByte(6)
-      ..write(obj.logo);
+      ..write(obj.logo)
+      ..writeByte(7)
+      ..write(obj.regionCode);
   }
 
   @override

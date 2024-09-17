@@ -21,7 +21,7 @@ final statsRepositoryProvider = AutoDisposeProvider<StatsRepository>.internal(
 );
 
 typedef StatsRepositoryRef = AutoDisposeProviderRef<StatsRepository>;
-String _$statsListHash() => r'd78df14817a6dcc49dfc6dd80d5c112317acb58e';
+String _$statsListHash() => r'351a2073494e49080e3e20f016cce424872670e0';
 
 /// Copied from Dart SDK
 class _SystemHash {

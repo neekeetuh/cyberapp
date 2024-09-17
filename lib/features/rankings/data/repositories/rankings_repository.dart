@@ -23,7 +23,8 @@ class RankingsRepository {
     final data = response.data as Map<String, dynamic>;
     final rankingTeamsListData = data['data'] as List<dynamic>;
     final rankingTeamsList = rankingTeamsListData
-        .map((json) => RankingTeam.fromDto(RankingTeamDto.fromJson(json)))
+        .map((json) => RankingTeam.fromDto(
+            dto: RankingTeamDto.fromJson(json), regionCode: regionCode))
         .toList();
     return rankingTeamsList;
   }
@@ -41,10 +42,12 @@ Future<List<RankingTeam>> rankingTeamsList(
   try {
     rankingTeamList =
         await rankingsRepository._fetchRankingTeamsListFromApi(regionCode);
-    final rankingsMap = {for (var e in rankingTeamList) e.teamName: e};
-    rankingsRepository.rankingsBox.putAll(rankingsMap);
+    final rankingsMap = {for (var e in rankingTeamList) e.uniqueKey: e};
+    await rankingsRepository.rankingsBox.putAll(rankingsMap);
   } catch (e) {
-    rankingTeamList = rankingsRepository.rankingsBox.values.toList();
+    rankingTeamList = rankingsRepository.rankingsBox.values
+        .where((team) => team.regionCode == regionCode)
+        .toList();
     log('couldn\'t get rankings list');
   }
   rankingTeamList.sort((a, b) => a.rank.compareTo(b.rank));

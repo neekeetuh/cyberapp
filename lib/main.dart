@@ -20,6 +20,8 @@ Future<void> main() async {
   await Firebase.initializeApp();
   DIContainer.registerDI();
   await GetIt.I.allReady();
+  // await GetIt.I<Box<RankingTeam>>().deleteFromDisk();
+  // await GetIt.I<Box<Stats>>().deleteFromDisk();
   runApp(ProviderScope(
     child: CyberApp(
       router: GetIt.I<AppRouter>(),

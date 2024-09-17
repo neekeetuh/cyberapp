@@ -23,7 +23,7 @@ final rankingsRepositoryProvider =
 );
 
 typedef RankingsRepositoryRef = AutoDisposeProviderRef<RankingsRepository>;
-String _$rankingTeamsListHash() => r'cb17c429f5588c8760918338019e21fc652f8b77';
+String _$rankingTeamsListHash() => r'56013875e0d5cb212b09a9c99b2b7d3bf03db633';
 
 /// Copied from Dart SDK
 class _SystemHash {

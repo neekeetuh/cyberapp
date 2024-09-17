@@ -21,6 +21,8 @@ class RankingTeam extends Equatable {
   final String earnings;
   @HiveField(6)
   final String logo;
+  @HiveField(7)
+  final String regionCode;
 
   const RankingTeam(
       {required this.id,
@@ -29,9 +31,11 @@ class RankingTeam extends Equatable {
       required this.country,
       required this.record,
       required this.earnings,
-      required this.logo});
+      required this.logo,
+      required this.regionCode});
 
-  factory RankingTeam.fromDto(RankingTeamDto dto) {
+  factory RankingTeam.fromDto(
+      {required RankingTeamDto dto, required String regionCode}) {
     return RankingTeam(
         id: const Uuid().v4(),
         rank: _rankFromJson(dto.rank),
@@ -39,7 +43,8 @@ class RankingTeam extends Equatable {
         country: dto.country,
         record: dto.record,
         earnings: dto.earnings,
-        logo: dto.logo);
+        logo: dto.logo,
+        regionCode: regionCode);
   }
 
   static int _rankFromJson(String rank) {
@@ -52,6 +57,10 @@ class RankingTeam extends Equatable {
 
   String get getLogoOrDefault {
     return logo != '' ? logo : '//www.vlr.gg/img/vlr/tmp/vlr.png';
+  }
+
+  String get uniqueKey {
+    return '$teamName+$regionCode';
   }
 
   @override

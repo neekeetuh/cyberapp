@@ -26,7 +26,8 @@ class StatsRepository {
     final data = response.data as Map<String, dynamic>;
     final statsListData = data['data']['segments'] as List<dynamic>;
     final statsList = statsListData
-        .map((json) => Stats.fromDto(StatsDto.fromJson(json)))
+        .map((json) => Stats.fromDto(
+            dto: StatsDto.fromJson(json), timeSpan: timeSpan, region: region))
         .toList();
     return statsList;
   }
@@ -43,11 +44,15 @@ Future<List<Stats>> statsList(
   final statsRepository = ref.read(statsRepositoryProvider);
   try {
     statsList = await statsRepository._fetchStatsListFromApi(region, timeSpan);
-    final statsMap = {for (var e in statsList) e.playerName: e};
-    statsRepository.statsBox.putAll(statsMap);
+    final statsMap = {for (var e in statsList) e.uniqueKey: e};
+    await statsRepository.statsBox.putAll(statsMap);
   } catch (e) {
     log('couldn\'t get stats list');
-    statsList = statsRepository.statsBox.values.toList();
+    statsList = statsRepository.statsBox.values
+        .where((stats) =>
+            stats.regionCode == region.regionCode &&
+            stats.timeSpan == timeSpan.jsonCode)
+        .toList();
   }
   statsList.sort((a, b) => b.rating.compareTo(a.rating));
   return statsList;

@@ -1,11 +1,13 @@
 import 'package:cyberapp/features/stats/data/data.dart';
+import 'package:cyberapp/features/stats/domain/domain.dart';
+import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 import 'package:uuid/uuid.dart';
 
 part 'stats.g.dart';
 
 @HiveType(typeId: 7)
-class Stats {
+class Stats extends Equatable {
   @HiveField(0)
   final String id;
   @HiveField(1)
@@ -34,6 +36,10 @@ class Stats {
   final String hs;
   @HiveField(13)
   final String csp;
+  @HiveField(14)
+  final String timeSpan;
+  @HiveField(15)
+  final String regionCode;
 
   const Stats(
       {required this.id,
@@ -49,9 +55,14 @@ class Stats {
       required this.fkpr,
       required this.fdpr,
       required this.hs,
-      required this.csp});
+      required this.csp,
+      required this.timeSpan,
+      required this.regionCode});
 
-  factory Stats.fromDto(StatsDto dto) {
+  factory Stats.fromDto(
+      {required StatsDto dto,
+      required StatsTimeSpans timeSpan,
+      required StatsRegion region}) {
     return Stats(
         id: const Uuid().v4(),
         playerName: dto.playerName,
@@ -66,6 +77,32 @@ class Stats {
         fkpr: dto.fkpr,
         fdpr: dto.fdpr,
         hs: dto.hs,
-        csp: dto.csp);
+        csp: dto.csp,
+        timeSpan: timeSpan.jsonCode,
+        regionCode: region.regionCode);
   }
+
+  String get uniqueKey {
+    return '$playerName+$regionCode+$timeSpan';
+  }
+
+  @override
+  List<Object?> get props => [
+        id,
+        playerName,
+        teamTag,
+        rating,
+        acs,
+        kd,
+        kast,
+        adpr,
+        kpr,
+        apr,
+        fkpr,
+        fdpr,
+        hs,
+        csp,
+        timeSpan,
+        regionCode
+      ];
 }
