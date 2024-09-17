@@ -7,7 +7,7 @@ part of 'rankings_repository.dart';
 // **************************************************************************
 
 String _$rankingsRepositoryHash() =>
-    r'd95a6396bbf1405b32cb5da1f11329f313702612';
+    r'5faf35dd78fefbefd4f6d157294bd0e6e9a22ba1';
 
 /// See also [rankingsRepository].
 @ProviderFor(rankingsRepository)
@@ -23,7 +23,7 @@ final rankingsRepositoryProvider =
 );
 
 typedef RankingsRepositoryRef = AutoDisposeProviderRef<RankingsRepository>;
-String _$rankingTeamsListHash() => r'4e1fd0e1711ae6b85b002b2e9fce16d540d152a6';
+String _$rankingTeamsListHash() => r'cb17c429f5588c8760918338019e21fc652f8b77';
 
 /// Copied from Dart SDK
 class _SystemHash {

@@ -19,6 +19,7 @@ Future<void> main() async {
   _registerHiveAdapters();
   await Firebase.initializeApp();
   DIContainer.registerDI();
+  await GetIt.I.allReady();
   runApp(ProviderScope(
     child: CyberApp(
       router: GetIt.I<AppRouter>(),

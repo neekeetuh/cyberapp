@@ -1,25 +1,28 @@
+import 'dart:developer';
+
 import 'package:cyberapp/features/matches/data/data.dart';
 import 'package:cyberapp/features/matches/domain/domain.dart';
 import 'package:dio/dio.dart';
+import 'package:get_it/get_it.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'matches_repository.g.dart';
 
 class MatchesRepository {
   final Dio dio;
+  final Box<LiveMatch> liveMatchesBox;
 
-  MatchesRepository({required this.dio});
+  final Box<MatchResult> matchesResultsBox;
 
-  Future<Map<String, dynamic>> _fetchMatches() async {
-    List<UpcomingMatch> upcomingMatchesList = await _fetchUpcomingMatches();
-    List<MatchResult> matchResultsList = await _fetchMatchResults();
-    List<LiveMatch> liveMatchesList = await _fetchLiveMatches();
-    return {
-      UpcomingMatch.queryMatchType: upcomingMatchesList,
-      MatchResult.queryMatchType: matchResultsList,
-      LiveMatch.queryMatchType: liveMatchesList
-    };
-  }
+  final Box<UpcomingMatch> upcomingMatchesBox;
+
+  const MatchesRepository(
+      {required this.dio,
+      required this.liveMatchesBox,
+      required this.matchesResultsBox,
+      required this.upcomingMatchesBox});
+
 
   // Future<dynamic> _getMatchesByType(String matchType) async {
   //   final response =
@@ -37,7 +40,7 @@ class MatchesRepository {
   //   return matchesList;
   // }
 
-  Future<List<UpcomingMatch>> _fetchUpcomingMatches() async {
+  Future<List<UpcomingMatch>> _fetchUpcomingMatchesFromApi() async {
     final response =
         await dio.get('https://vlrggapi.vercel.app/match?q=upcoming');
     final data = response.data as Map<String, dynamic>;
@@ -48,7 +51,7 @@ class MatchesRepository {
     return matchesList;
   }
 
-  Future<List<LiveMatch>> _fetchLiveMatches() async {
+  Future<List<LiveMatch>> _fetchLiveMatchesFromApi() async {
     final response =
         await dio.get('https://vlrggapi.vercel.app/match?q=live_score');
     final data = response.data as Map<String, dynamic>;
@@ -59,7 +62,7 @@ class MatchesRepository {
     return matchesList;
   }
 
-  Future<List<MatchResult>> _fetchMatchResults() async {
+  Future<List<MatchResult>> _fetchMatchResultsFromApi() async {
     final response =
         await dio.get('https://vlrggapi.vercel.app/match?q=results');
     final data = response.data as Map<String, dynamic>;
@@ -73,33 +76,59 @@ class MatchesRepository {
 
 @riverpod
 MatchesRepository matchesRepository(MatchesRepositoryRef ref) =>
-    MatchesRepository(dio: Dio());
+    MatchesRepository(
+        dio: Dio(),
+        liveMatchesBox: GetIt.I<Box<LiveMatch>>(),
+        matchesResultsBox: GetIt.I<Box<MatchResult>>(),
+        upcomingMatchesBox: GetIt.I<Box<UpcomingMatch>>());
 
 @riverpod
 Future<List<UpcomingMatch>> upcomingMatchesList(
     UpcomingMatchesListRef ref) async {
-  final matchesRepository = ref.watch(matchesRepositoryProvider);
-  final matchesList = await matchesRepository._fetchUpcomingMatches();
-  return matchesList;
+  final matchesRepository = ref.read(matchesRepositoryProvider);
+  var upcomingMatchesList = <UpcomingMatch>[];
+  try {
+    upcomingMatchesList =
+        await matchesRepository._fetchUpcomingMatchesFromApi();
+    final upcomingMatchesMap = {for (var e in upcomingMatchesList) e.matchPageUrl: e};
+    await matchesRepository.upcomingMatchesBox.putAll(upcomingMatchesMap);
+  } catch (e) {
+    upcomingMatchesList = matchesRepository.upcomingMatchesBox.values.toList();
+    log('couldn\'t get an upcoming matches list list from api ');
+  }
+  upcomingMatchesList
+      .sort((a, b) => a.timeUntilMatch.compareTo(b.timeUntilMatch));
+  return upcomingMatchesList;
 }
 
 @riverpod
 Future<List<LiveMatch>> liveMatchesList(LiveMatchesListRef ref) async {
-  final matchesRepository = ref.watch(matchesRepositoryProvider);
-  final matchesList = await matchesRepository._fetchLiveMatches();
-  return matchesList;
+  final matchesRepository = ref.read(matchesRepositoryProvider);
+  var liveMatchesList = <LiveMatch>[];
+  try {
+    liveMatchesList = await matchesRepository._fetchLiveMatchesFromApi();
+    final liveMatchesMap = {for (var e in liveMatchesList) e.matchPageUrl: e};
+    await matchesRepository.liveMatchesBox.putAll(liveMatchesMap);
+  } catch (e) {
+    liveMatchesList = matchesRepository.liveMatchesBox.values.toList();
+    log('couldn\'t get a live matches list list from api ');
+  }
+  liveMatchesList.sort((a, b) => a.timeUntilMatch.compareTo(b.timeUntilMatch));
+  return liveMatchesList;
 }
 
 @riverpod
 Future<List<MatchResult>> matchResultsList(MatchResultsListRef ref) async {
-  final matchesRepository = ref.watch(matchesRepositoryProvider);
-  final matchesList = await matchesRepository._fetchMatchResults();
-  return matchesList;
-}
-
-@riverpod
-Future<Map<String, dynamic>> matchesMap(MatchesMapRef ref) async {
-  final matchesRepository = ref.watch(matchesRepositoryProvider);
-  final matches = await matchesRepository._fetchMatches();
-  return matches;
+  final matchesRepository = ref.read(matchesRepositoryProvider);
+  var matchesResultsList = <MatchResult>[];
+  try {
+    matchesResultsList = await matchesRepository._fetchMatchResultsFromApi();
+    final liveMatchesMap = {for (var e in matchesResultsList) e.matchPageUrl: e};
+    await matchesRepository.matchesResultsBox.putAll(liveMatchesMap);
+  } catch (e) {
+    matchesResultsList = matchesRepository.matchesResultsBox.values.toList();
+    log('couldn\'t get matches results list list from api ');
+  }
+  matchesResultsList.sort((a, b) => a.timeCompleted.compareTo(b.timeCompleted));
+  return matchesResultsList;
 }

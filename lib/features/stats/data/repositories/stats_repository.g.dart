@@ -6,7 +6,7 @@ part of 'stats_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$statsRepositoryHash() => r'9e257b7a2550108ac51b138a2868eb058c934608';
+String _$statsRepositoryHash() => r'ad48879ab41c8f152c89926aac51e802bae0acd4';
 
 /// See also [statsRepository].
 @ProviderFor(statsRepository)
@@ -21,7 +21,7 @@ final statsRepositoryProvider = AutoDisposeProvider<StatsRepository>.internal(
 );
 
 typedef StatsRepositoryRef = AutoDisposeProviderRef<StatsRepository>;
-String _$statsListHash() => r'75b94e5c371ec6e2522317add6b21aee02641946';
+String _$statsListHash() => r'd78df14817a6dcc49dfc6dd80d5c112317acb58e';
 
 /// Copied from Dart SDK
 class _SystemHash {

@@ -22,8 +22,7 @@ class RankingTeam extends Equatable {
   @HiveField(6)
   final String logo;
 
-  @HiveField(7)
-   const RankingTeam(
+  const RankingTeam(
       {required this.id,
       required this.rank,
       required this.teamName,
@@ -34,7 +33,7 @@ class RankingTeam extends Equatable {
 
   factory RankingTeam.fromDto(RankingTeamDto dto) {
     return RankingTeam(
-      id: const Uuid().v4(),
+        id: const Uuid().v4(),
         rank: _rankFromJson(dto.rank),
         teamName: dto.teamName,
         country: dto.country,

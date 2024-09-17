@@ -6,7 +6,7 @@ part of 'news_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$newsRepositoryHash() => r'12be4d673d99e286cb24e57a498f944738b8b91a';
+String _$newsRepositoryHash() => r'96699b22dbe04b3529e9b12a53a04152d825afd3';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -155,7 +155,7 @@ class _NewsRepositoryProviderElement
   Dio get dio => (origin as NewsRepositoryProvider).dio;
 }
 
-String _$newsListHash() => r'bc346c7243bda073682937367e2821950651a58e';
+String _$newsListHash() => r'005a8f57a360755a0b44d50e3f90f76ef7eb21b0';
 
 /// See also [newsList].
 @ProviderFor(newsList)
@@ -169,7 +169,7 @@ final newsListProvider = AutoDisposeFutureProvider<List<NewsData>>.internal(
 );
 
 typedef NewsListRef = AutoDisposeFutureProviderRef<List<NewsData>>;
-String _$newsDetailHash() => r'2bf60f833ddc70b7a3c7d009c76bf0b6c09c1d05';
+String _$newsDetailHash() => r'167a6a06ebdb52316078197ff8885364099e123e';
 
 /// See also [newsDetail].
 @ProviderFor(newsDetail)

@@ -1,6 +1,10 @@
+import 'dart:developer';
+
 import 'package:cyberapp/features/stats/data/data.dart';
 import 'package:cyberapp/features/stats/domain/domain.dart';
 import 'package:dio/dio.dart';
+import 'package:get_it/get_it.dart';
+import 'package:hive/hive.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'stats_repository.g.dart';
@@ -8,12 +12,17 @@ part 'stats_repository.g.dart';
 class StatsRepository {
   final Dio dio;
 
-  StatsRepository({required this.dio});
+  final Box<Stats> statsBox;
+
+  const StatsRepository({
+    required this.dio,
+    required this.statsBox,
+  });
 
   Future<List<Stats>> _fetchStatsListFromApi(
       StatsRegion region, StatsTimeSpans timeSpan) async {
     final response = await dio.get(
-        'https://vlrggapi.vercel.app/stats/${region.regionCode}/${timeSpan.jsonCode}');
+        'https://vlrggapi.vercel.app/stats?region=${region.regionCode}&timespan=${timeSpan.jsonCode}');
     final data = response.data as Map<String, dynamic>;
     final statsListData = data['data']['segments'] as List<dynamic>;
     final statsList = statsListData
@@ -25,18 +34,22 @@ class StatsRepository {
 
 @riverpod
 StatsRepository statsRepository(StatsRepositoryRef ref) =>
-    StatsRepository(dio: Dio());
+    StatsRepository(dio: Dio(), statsBox: GetIt.I<Box<Stats>>());
 
 @riverpod
 Future<List<Stats>> statsList(
     StatsListRef ref, StatsRegion region, StatsTimeSpans timeSpan) async {
   var statsList = <Stats>[];
+  final statsRepository = ref.read(statsRepositoryProvider);
   try {
-    final statsRepository = ref.watch(statsRepositoryProvider);
     statsList = await statsRepository._fetchStatsListFromApi(region, timeSpan);
+    final statsMap = {for (var e in statsList) e.playerName: e};
+    statsRepository.statsBox.putAll(statsMap);
   } catch (e) {
-    throw Exception(e.toString());
+    log('couldn\'t get stats list');
+    statsList = statsRepository.statsBox.values.toList();
   }
+  statsList.sort((a, b) => b.rating.compareTo(a.rating));
   return statsList;
 }
 
